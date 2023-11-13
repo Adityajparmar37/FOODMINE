@@ -1,4 +1,4 @@
-# Lessons:
+# Progress of project 
 
 ## 1. Demo And Installation
 
