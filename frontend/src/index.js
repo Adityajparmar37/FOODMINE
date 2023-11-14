@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CartProvider from './components/Hooks/useCart';
+import './axios.Config.js';
 
 
 ReactDOM.render(
