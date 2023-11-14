@@ -1,4 +1,4 @@
-# Lessons:
+# Progress of project 
 
 ## 1. Demo And Installation
 
@@ -15,11 +15,11 @@
 
 - [x] Add Header.js
 - [x] Use Header in App.js
-- [x] Install react-router-dom in frontend
+- [x] Install react-router-dom in frontend ( ### NEW ### )
 - [x] Add header.module.css
-- [x] Use BrowserRouter inside index.js
+- [x] Use BrowserRouter inside index.js   ( ### NEW ### )
 - [x] Update Header.js
-- [x] Update header.module.css
+- [x] Update header.module.css    ( ### NEW ### )
 
 ## 4. Adding Thumbnails
 
@@ -28,16 +28,16 @@
 - [x] Use AppRoutes in App.js
 - [x] Add data.js
 - [x] Add food Images
-- [x] Add foodService.js
+- [x] Add foodService.js   ( ### NEW , ALL FUNTION IN ONE FOLDER ### )
 - [x] Update HomePage.js
-  - [x] Add Reducer
+  - [x] Add Reducer         ( ### NEW , REVISIT ### )
   - [x] Load foods
   - [x] Add Thumbnails.js
     - [x] Add CSS File
     - [x] Add Image
     - [x] Add Title
     - [x] Add Favorite Icon
-    - [x] Add StarRating.js
+    - [x] Add StarRating.js   ( ### NEW  ### )
       - [x] Add Star Images
       - [x] Add CSS
     - [x] Add Origins
@@ -47,8 +47,8 @@
 
 ## 5. Adding Search
 
-- [x] Add Search Route to AppRoutes.js
-- [x] Add Search function to foodService.js
+- [x] Add Search Route to AppRoutes.js   
+- [x] Add Search function to foodService.js     ( ### NEW ### )
 - [x] Use Search Inside HomePage.js
 - [x] Add Search Component
   - [x] Add CSS
@@ -67,7 +67,7 @@
 
 - [x] Add Tag route to AppRoutes.js
 - [x] Add getAllByTag function to foodService.js
-- [x] Use tag param in HomePage.js
+- [x] Use tag param in HomePage.js              ( ### NEW , TO GET VALUE FROM URL### )
 
 ## 7. Food Page
 
@@ -79,7 +79,7 @@
   - [x] Create Template
   - [x] Add Css
 
-## 8. Cart Page
+## 8. Cart Page                            ( ### NEW , REVISIT , IMP ### )
 
 - [x] Create Cart Page Component
   - [x] Create css
@@ -92,7 +92,7 @@
   - [x] Add Title Component
   - [x] Add JSX
   - [x] Add CSS
-- [x] Update useCart Hook
+- [x] Update useCart Hook            ( ### NEW , CUSTOM HOOKS , CART FUNCTIONALITY IN USECART HOOK ### )
   - [x] Add to cart
   - [x] Remove from cart
   - [x] Change quantity
