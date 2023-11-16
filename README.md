@@ -1,4 +1,4 @@
-# Progress of project 
+# Progress of project
 
 ## 1. Demo And Installation
 
@@ -17,9 +17,9 @@
 - [x] Use Header in App.js
 - [x] Install react-router-dom in frontend ( ### NEW ### )
 - [x] Add header.module.css
-- [x] Use BrowserRouter inside index.js   ( ### NEW ### )
+- [x] Use BrowserRouter inside index.js ( ### NEW ### )
 - [x] Update Header.js
-- [x] Update header.module.css    ( ### NEW ### )
+- [x] Update header.module.css ( ### NEW ### )
 
 ## 4. Adding Thumbnails
 
@@ -28,16 +28,16 @@
 - [x] Use AppRoutes in App.js
 - [x] Add data.js
 - [x] Add food Images
-- [x] Add foodService.js   ( ### NEW , ALL FUNTION IN ONE FOLDER ### )
+- [x] Add foodService.js ( ### NEW , ALL FUNTION IN ONE FOLDER ### )
 - [x] Update HomePage.js
-  - [x] Add Reducer         ( ### NEW , REVISIT ### )
+  - [x] Add Reducer ( ### NEW , REVISIT ### )
   - [x] Load foods
   - [x] Add Thumbnails.js
     - [x] Add CSS File
     - [x] Add Image
     - [x] Add Title
     - [x] Add Favorite Icon
-    - [x] Add StarRating.js   ( ### NEW  ### )
+    - [x] Add StarRating.js ( ### NEW ### )
       - [x] Add Star Images
       - [x] Add CSS
     - [x] Add Origins
@@ -47,8 +47,8 @@
 
 ## 5. Adding Search
 
-- [x] Add Search Route to AppRoutes.js   
-- [x] Add Search function to foodService.js     ( ### NEW ### )
+- [x] Add Search Route to AppRoutes.js
+- [x] Add Search function to foodService.js ( ### NEW ### )
 - [x] Use Search Inside HomePage.js
 - [x] Add Search Component
   - [x] Add CSS
@@ -67,7 +67,7 @@
 
 - [x] Add Tag route to AppRoutes.js
 - [x] Add getAllByTag function to foodService.js
-- [x] Use tag param in HomePage.js              ( ### NEW , TO GET VALUE FROM URL### )
+- [x] Use tag param in HomePage.js ( ### NEW , TO GET VALUE FROM URL### )
 
 ## 7. Food Page
 
@@ -79,7 +79,7 @@
   - [x] Create Template
   - [x] Add Css
 
-## 8. Cart Page                            ( ### NEW , REVISIT , IMP ### )
+## 8. Cart Page ( ### NEW , REVISIT , IMP ### )
 
 - [x] Create Cart Page Component
   - [x] Create css
@@ -92,7 +92,7 @@
   - [x] Add Title Component
   - [x] Add JSX
   - [x] Add CSS
-- [x] Update useCart Hook            ( ### NEW , CUSTOM HOOKS , CART FUNCTIONALITY IN USECART HOOK ### )
+- [x] Update useCart Hook ( ### NEW , CUSTOM HOOKS , CART FUNCTIONALITY IN USECART HOOK ### )
   - [x] Add to cart
   - [x] Remove from cart
   - [x] Change quantity
@@ -109,3 +109,57 @@
   - [x] Food Page
   - [x] Cart Page
 - [x] Fixing Search Issue
+
+## 10. Connect To Backend
+
+- [x] Create backend folder
+- [x] Initializing NPM Project
+- [x] Copy data.ts to backend/src
+- [x] npm install express cors
+- [x] Create .gitignore
+- [x] Create server.js
+  - [x] Add & Config Express
+    - [x] Add & Config Cors
+  - [x] Add Food Router
+    - [x] Add jsconfig.json
+    - [x] Add Apis
+- [x] npm install nodemon
+  - [x] Add dev Script into the package.json
+  - [x] npm run dev
+- [x] Add axios package
+  - [x] axiosConfig.js file
+- [x] Connect food service to the Apis
+
+## 11. Login Page
+
+### Backend
+
+- [x] Create User Router
+  - [x] npm install jsonwebtoken
+  - [x] Add Login Api
+    - [x] Add sample_users to data.js
+    - [x] Add httpStatus.js
+  - [x] Add generateTokenResponse function
+- [x] Add User Router To server.js
+
+### Frontend
+
+- [x] Create user service
+  - [x] Add getUser function
+  - [x] Add login function
+  - [x] Add logout function
+- [x] npm install react-toastify
+- [x] Create useAuth hook
+  - [x] Add user state
+  - [x] Add Login function
+  - [x] Add logout function
+- [x] Create LoginPage component
+  - [x] Add to AppRoutes.js
+  - [x] Create Custom Components
+    - [x] Input Container
+      - [x] CSS
+    - [x] Input
+      - [x] CSS
+    - [x] Button
+      - [x] CSS
+- [x] Add useAuth to the Header component

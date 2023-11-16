@@ -1,8 +1,9 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom';
-import CartPage from './components/Cart/CartPage';
+import CartPage from './Pages/Cart/CartPage';
 import FoodPage from './Pages/Food/FoodPage';
 import HomePage from './Pages/Home/HomePage';
+import LoginPage from './Pages/Login/LoginPage';
 
 
 function AppRoutes() {
@@ -15,6 +16,7 @@ function AppRoutes() {
                 <Route path="/tag/:tag" element={<HomePage />} />
                 <Route path="/foods/:id" element={<FoodPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/login" element={<LoginPage/>} />
 
             </Routes>
         </>

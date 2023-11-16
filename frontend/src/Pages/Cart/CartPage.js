@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useCart } from '../Hooks/useCart';
-import NotFound from '../NotFound/NotFound';
-import Price from '../Price/Price';
-import Title from '../Title/Title';
+import { useCart } from '../../Hooks/useCart';
+import NotFound from '../../components/NotFound/NotFound';
+import Price from '../../components/Price/Price';
+import Title from '../../components/Title/Title';
 import classes from './cartPage.module.css';
 
 

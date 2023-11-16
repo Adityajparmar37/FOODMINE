@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useCart } from '../Hooks/useCart';
+import { useCart } from '../../Hooks/useCart';
 import classes from './header.module.css';
 
 const Header = () => {
