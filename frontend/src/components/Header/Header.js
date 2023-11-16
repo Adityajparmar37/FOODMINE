@@ -31,11 +31,12 @@ const Header = () => {
                                                 <a onClick={logout}>Logout</a>
                                             </div>
 
-                                            {/* -------cart page ----*/}
+                                           
 
 
 
                                         </li>
+     {/* -------cart page ----*/}
                                         <Link to="/cart">
                                             Cart
                                             {cart.totalCount > 0 && <span className={classes.cart_count}>{cart.totalCount}</span>}
