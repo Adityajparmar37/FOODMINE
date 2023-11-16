@@ -15,7 +15,7 @@
 
 - [x] Add Header.js
 - [x] Use Header in App.js
-- [x] Install react-router-dom in frontend "( ### NEW ### )"
+- [x] Install react-router-dom in frontend ( ### NEW ### )
 - [x] Add header.module.css
 - [x] Use BrowserRouter inside index.js ( ### NEW ### )
 - [x] Update Header.js
