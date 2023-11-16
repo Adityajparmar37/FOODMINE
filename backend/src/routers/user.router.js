@@ -18,10 +18,8 @@ router.post("/login", (req, res) => {
         res.send(generateTokenResponese(user));
         return;
     }
+    res.status(BAD_REQUEST).send('username or password incorrect');
 
-    else {
-        res.send(BAD_REQUEST).send('username or password incorrect');
-    }
 });
 
 const generateTokenResponese = (user) => {
@@ -44,10 +42,9 @@ const generateTokenResponese = (user) => {
         name: user.name,
         address: user.address,
         isAdmin: user.isAdmin,
-        token
+        token,
+    };
+};
 
-    }
-}
 
- 
 export default router;

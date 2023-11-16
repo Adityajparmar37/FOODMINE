@@ -11,7 +11,7 @@ const EMPTY_CART = {
 };
 
 
-export default function CartProvider({ children}) {
+export default function CartProvider({ children }) {
     const initCart = getCartFromLocalStorage();
     const [cartItems, setCartItems] = useState(initCart.items);
 
@@ -47,7 +47,7 @@ export default function CartProvider({ children}) {
             totalCount,
         }))
 
-        document.title = `Food Mine !`
+        document.title = `Food Mine ! (${totalCount})`
     }, [cartItems]);
 
     const sum = (items) => {

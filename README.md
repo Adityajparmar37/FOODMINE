@@ -144,16 +144,16 @@
 
 ### Frontend
 
-- [x] Create user service
+- [x] Create user service               ( ### MAIN ### )
   - [x] Add getUser function
   - [x] Add login function
   - [x] Add logout function
 - [x] npm install react-toastify
-- [x] Create useAuth hook
+- [x] Create useAuth hook               ( ### NEW MAIN IMP ### )
   - [x] Add user state
   - [x] Add Login function
   - [x] Add logout function
-- [x] Create LoginPage component
+- [x] Create LoginPage component         ( ### REVISIT ### )
   - [x] Add to AppRoutes.js
   - [x] Create Custom Components
     - [x] Input Container

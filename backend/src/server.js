@@ -13,7 +13,7 @@ app.use(cors({
 
 
 app.use('/api/foods', foodRouter);
-app.use('/login', userRouter);
+app.use('/api/users', userRouter);
 
 
 
