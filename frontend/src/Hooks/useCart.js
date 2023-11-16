@@ -47,7 +47,11 @@ export default function CartProvider({ children }) {
             totalCount,
         }))
 
-        document.title = `Food Mine ! (${totalCount})`
+        if (totalCount === 0)
+            document.title = `Food Mine !`
+        else
+            document.title = `Food Mine !  ( ${totalCount} )`
+
     }, [cartItems]);
 
     const sum = (items) => {
