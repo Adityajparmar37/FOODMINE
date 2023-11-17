@@ -25,12 +25,14 @@ export const dbconnect = async () => {
 async function seedUsers() {
     const usersCount = await UserModel.countDocuments();
 
-    //MODEL JO PHELA THI BANAVLO HOI TOH PACHO NAE BANAVO
+    //MODEL MA JO PHELA THI DATA CHE K NHI
     if (usersCount > 0) {
         console.log('User Seed is already done');
         return;
     }
 
+
+    //AGAR MODEL KHALI CHE TOH DATA.js MA THI HARD DATA HAI NAE USERMODEL MA NAKHI(SEED) DAE
     for (let user of sample_users) {
         user.password = await bcrypt.hash(user.password, 10);
         await UserModel.create(user);

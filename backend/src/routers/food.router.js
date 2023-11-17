@@ -5,6 +5,7 @@ import handler from 'express-async-handler'
 
 const router = Router();
 
+//handler is use for 2 reasons one to make my api async and second to handle express error
 router.get('/', handler(async (req, res) => {
     const foods = await FoodModel.find({});
     res.send(foods);

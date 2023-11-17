@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { application, Router } from 'express';
 import jwt from 'jsonwebtoken';
 import { BAD_REQUEST } from '../constants/httpStatus.js';
 import handler from 'express-async-handler';
@@ -20,6 +20,37 @@ router.post("/login", handler(async (req, res) => {
     res.status(BAD_REQUEST).send('username or password incorrect');
 
 })
+);
+
+
+
+router.post("/register", handler(async (req, res) => {
+
+    const { name, email, password, address } = req.body;
+
+    const user = await UserModel.findOne({ email });
+
+    if (user) {
+        res.status(BAD_REQUEST).send('User Already Exists , Please Login');
+        return;
+    }
+
+    const encryptPassword = await bcrypt.hash(password, 10);
+
+    const NewUser = {
+        name,
+        email: email.toLowerCase(),
+        password: encryptPassword,
+        address,
+    };
+
+
+    const addUser = await UserModel.create(NewUser);
+
+    ///token is generate after user in added in database , as we want user ID which we get form MongoDB automate id 
+    res.send(generateTokenResponese(addUser));
+})
+
 );
 
 const generateTokenResponese = (user) => {

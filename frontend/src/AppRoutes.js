@@ -4,6 +4,7 @@ import CartPage from './Pages/Cart/CartPage';
 import FoodPage from './Pages/Food/FoodPage';
 import HomePage from './Pages/Home/HomePage';
 import LoginPage from './Pages/Login/LoginPage';
+import Register from './Pages/Register/Register';
 
 
 function AppRoutes() {
@@ -16,7 +17,8 @@ function AppRoutes() {
                 <Route path="/tag/:tag" element={<HomePage />} />
                 <Route path="/foods/:id" element={<FoodPage />} />
                 <Route path="/cart" element={<CartPage />} />
-                <Route path="/login" element={<LoginPage/>} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<Register />} />
 
             </Routes>
         </>
