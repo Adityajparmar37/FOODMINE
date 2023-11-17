@@ -9,28 +9,31 @@ import './axios.Config.js';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from './Hooks/useAuth';
+import { LoadingProvider } from './Hooks/useLoading';
 
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <App />
-          <ToastContainer
-            position='bottom-right'
-            authClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme='light'
-          />
-        </CartProvider>
-      </AuthProvider>
+      <LoadingProvider>
+        <AuthProvider>
+          <CartProvider>
+            <App />
+            <ToastContainer
+              position='bottom-right'
+              authClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme='light'
+            />
+          </CartProvider>
+        </AuthProvider>
+      </LoadingProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
