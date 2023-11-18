@@ -22,32 +22,22 @@ const Header = () => {
                         <ul>
                             {
                                 user ? (
-                                    <>
-                                        <li className={classes.menu_container}>
-                                            <Link to="/profile">{user.name}</Link>
-                                            <div className={classes.menu}>
-                                                <Link to="/profile">Profile</Link>
-                                                <Link to="/orders">Orders</Link>
-                                                <a onClick={logout}>Logout</a>
-                                            </div>
-
-                                           
-
-
-
-                                        </li>
-     {/* -------cart page ----*/}
-                                        <Link to="/cart">
-                                            Cart
-                                            {cart.totalCount > 0 && <span className={classes.cart_count}>{cart.totalCount}</span>}
-                                        </Link>
-                                    </>
+                                    <li className={classes.menu_container}>
+                                        <Link to="/profile">{user.name}</Link>
+                                        <div className={classes.menu}>
+                                            <Link to="/profile">Profile</Link>
+                                            <Link to="/orders">Orders</Link>
+                                            <a onClick={logout}>Logout</a>
+                                        </div>
+                                    </li>
 
                                 ) : (
                                     <Link to="/login">Login</Link>
                                 )}
-
-
+                            <Link to="/cart">
+                                Cart
+                                {cart.totalCount > 0 && <span className={classes.cart_count}>{cart.totalCount}</span>}
+                            </Link>
                         </ul>
                     </nav>
                 </div>
