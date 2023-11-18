@@ -32,11 +32,15 @@ const Header = () => {
                                     </li>
 
                                 ) : (
-                                    <Link to="/login">Login</Link>
+                                    <>
+                                        <Link to="/login">Login</Link>
+                                    </>
                                 )}
                             <Link to="/cart">
                                 Cart
-                                {cart.totalCount > 0 && <span className={classes.cart_count}>{cart.totalCount}</span>}
+
+                                {user ? cart.totalCount > 0 && <span className={classes.cart_count}>{cart.totalCount}</span> : ''}
+
                             </Link>
                         </ul>
                     </nav>

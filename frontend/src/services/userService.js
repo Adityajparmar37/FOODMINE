@@ -22,5 +22,6 @@ export const register = async (registerData) => {
 
 export const logout = () => {
   localStorage.removeItem('user');
+  // localStorage.removeItem('cart');
   document.title = 'FOOD MINE ! '
 };

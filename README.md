@@ -192,3 +192,52 @@
   - [x] Thumnails compnent
   - [x] Food Page component
   - [x] Cart Page component
+
+
+## 13. Register Page
+
+- [x] Add Register Page Component
+  - [x] Add to AppRoutes
+  - [x] Add Link to login page
+  - [x] CSS
+- [x] Add '/register' api to user.router.js
+- [x] Add register function in userService
+- [x] Add register function in useAuth hook
+  - [x] Add to Register page
+
+## 14. Loading
+
+- [x] Create useLoading hook                             ( ### NEW MAIN IMP ### )
+  - [x] Add LoadingProvider to index.js                   ( ### NEW MAIN IMP ### )
+- [x] Create Loading component
+  - [x] Add to App.js
+  - [x] Add Image
+  - [x] CSS 
+- [x] Create Loading Interceptor                             ( ### NEW MAIN IMP ### )
+
+## 15. Checkout Page    ( ### NEW MAIN IMP ### )
+
+- [x] Fixing Loading problem
+- [x] Create Checkout Page component
+  - [x] Create AuthRoute                                         ( ### NEW MAIN IMP ### )
+  - [x] Add to Routes
+  - [x] Add css
+  - [x] Create Order Items List
+  - [x] Create Maps Component                                   ( ### NEW MAIN IMP ### )
+    - [x] Install leaflet & react-leaflet
+    - [x] Adding images to public folder
+    - [x] Fixing header menu problem with map
+- [x] Create Order router
+
+  - [x] Create auth middleware                                     ( ### NEW MAIN IMP ### )
+    - [x] Add UNAUTHORIZED http statuss
+    - [x] Add to Order router
+  - [x] Create Order Model
+    - [x] Create Order Status
+  - [x] Add to server.js
+
+- [x] Connecting Frontend to Backend
+  - [x] Create order service
+    - [x] Add create function
+  - [x] Create Auth interceptor                                     ( ### NEW MAIN IMP ### )
+    - [x] Add to index.js

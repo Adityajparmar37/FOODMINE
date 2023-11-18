@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 
+
 const AuthContext = createContext(null);
 
 
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         userService.logout();
+        document.title = `Food Mine !`
         setUser(null);
         navigate("/");
         toast.success('Logout Successful');
