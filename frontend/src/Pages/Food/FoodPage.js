@@ -8,11 +8,13 @@ import Tags from '../../components/Tags/Tags';
 import { getById } from '../../services/foodService';
 import classes from './foodPage.module.css';
 import { toast } from 'react-toastify';
+// import { useLoading } from '../../Hooks/useLoading';
 
 export default function FoodPage() {
     const [food, setFood] = useState({});
     const { id } = useParams();
     const { addToCart } = useCart();
+    // const { showLoading, hideLoading } = useLoading();
     const navigate = useNavigate();
 
     useEffect(() => {
