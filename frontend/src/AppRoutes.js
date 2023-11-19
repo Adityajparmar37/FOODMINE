@@ -6,6 +6,7 @@ import CartPage from './Pages/Cart/CartPage';
 import FoodPage from './Pages/Food/FoodPage';
 import HomePage from './Pages/Home/HomePage';
 import LoginPage from './Pages/Login/LoginPage';
+import Payment from './Pages/Payment/Payment';
 import Register from './Pages/Register/Register';
 
 
@@ -23,6 +24,10 @@ function AppRoutes() {
                 <Route path="/register" element={<Register />} />
                 <Route path='/checkout' element={<AuthRoute>
                     <CheckoutPage />
+                </AuthRoute>}
+                />
+                <Route path='/payment' element={<AuthRoute>
+                    <Payment />
                 </AuthRoute>}
                 />
             </Routes>
