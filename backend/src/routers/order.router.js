@@ -9,7 +9,7 @@ router.use(authMid);
 
 router.post('/create', handler(async (req, res) => {
     const order = req.body;
-    console.log("ORDER==>", order.cartItems);
+    // console.log("ORDER==>", order.cartItems);
 
     if (order.cartItems.length <= 0) res.status(401).send('Cart Is Empty !');
 
