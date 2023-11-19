@@ -6,6 +6,7 @@ import CartPage from './Pages/Cart/CartPage';
 import FoodPage from './Pages/Food/FoodPage';
 import HomePage from './Pages/Home/HomePage';
 import LoginPage from './Pages/Login/LoginPage';
+import OrderTrack from './Pages/OrderTrack/OrderTrack';
 import Payment from './Pages/Payment/Payment';
 import Register from './Pages/Register/Register';
 
@@ -28,6 +29,11 @@ function AppRoutes() {
                 />
                 <Route path='/payment' element={<AuthRoute>
                     <Payment />
+                </AuthRoute>}
+                />
+
+                <Route path='/track/:orderId' element={<AuthRoute>
+                    <OrderTrack />
                 </AuthRoute>}
                 />
             </Routes>
