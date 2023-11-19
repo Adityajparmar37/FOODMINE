@@ -38,7 +38,7 @@ const orderSchema = new Schema({
     addressLatLng: { type: LatLngSchema, required: true },
     paymentId: { type: String },
     totalPrice: { type: Number, required: true },
-    items: { type: [OrderItemSchema], required: true },
+    cartItems: { type: [OrderItemSchema], required: true },
     status: { type: String, default: OrderStatus.NEW },
     user: { type: Schema.Types.ObjectId, required: true },
 }, {
