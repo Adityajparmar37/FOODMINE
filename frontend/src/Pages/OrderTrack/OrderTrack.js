@@ -4,6 +4,7 @@ import DateTime from '../../components/Date/DateFormate';
 import NotFound from '../../components/NotFound/NotFound';
 import OrderItemsList from '../../components/OrderitemsList/OrderitemsList';
 import { trackOrderById } from '../../services/orderService';
+import { QRcodeGen } from '../../components/QRcodeGen/QRcodeGen';
 import classes from './orderTrack.module.css';
 
 export default function OrderTrack() {
@@ -47,8 +48,14 @@ export default function OrderTrack() {
                         </div>
                     )}
                 </div>
-
                 <OrderItemsList order={order} />
+                {console.log(order)}
+
+                {order.paymentId && (
+                    <div>
+                        <QRcodeGen orderValue={order} />
+                    </div>
+                )}
             </div>
         </div>
     )
