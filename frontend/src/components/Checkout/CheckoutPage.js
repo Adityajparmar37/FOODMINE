@@ -35,54 +35,62 @@ export default function CheckoutPage() {
             return;
         }
 
-        await createOrder({ ...order, name: data.name, address: data.address })
-        navigate('/payment');
-    }
-        return (
-            <>
-                <form onSubmit={handleSubmit(submit)}
-                    className={classes.container}>
-                    <div className={classes.content}>
-                        <Title title="Your Order" fontSize="1.6rem" />
-                        <div className={classes.input}>
-                            <Input
-                                defaultValue={user.name}
-                                label="Name"
-                                {...register('name')}
-                                error={errors.name}
-                            />
+        let { flag } = await createOrder({ ...order, name: data.name, address: data.address })
+        console.log("temp : " + flag)
+        if (flag) {
+            setTimeout(() => {
+                navigate('/payment');
+            }, 1500);
+        } 
 
-                            <Input
-                                defaultValue={user.address}
-                                label="Address"
-                                {...register('address')}
-                                error={errors.address}
-                            />
-                        </div>
-                        <OrderitemsList order={order} />
-                    </div>
-                    <div>
-                        <Title title="Choose Your Location" frontSize="1.6rem" />
-                        <Map
-                            location={order.addressLatLng}
-                            onChange={latlng => {
-                                console.log(latlng);
-                                setOrder({ ...order, addressLatLng: latlng });
-                            }}
+
+
+    }
+    return (
+        <>
+            <form onSubmit={handleSubmit(submit)}
+                className={classes.container}>
+                <div className={classes.content}>
+                    <Title title="Your Order" fontSize="1.6rem" />
+                    <div className={classes.input}>
+                        <Input
+                            defaultValue={user.name}
+                            label="Name"
+                            {...register('name')}
+                            error={errors.name}
+                        />
+
+                        <Input
+                            defaultValue={user.address}
+                            label="Address"
+                            {...register('address')}
+                            error={errors.address}
                         />
                     </div>
+                    <OrderitemsList order={order} />
+                </div>
+                <div>
+                    <Title title="Choose Your Location" frontSize="1.6rem" />
+                    <Map
+                        location={order.addressLatLng}
+                        onChange={latlng => {
+                            console.log(latlng);
+                            setOrder({ ...order, addressLatLng: latlng });
+                        }}
+                    />
+                </div>
 
-                    <div className={classes.buttons_container}>
-                        <div className={classes.buttons}>
-                            <Button
-                                type="submit"
-                                text="Go To Payment"
-                                width="100%"
-                                height="3rem"
-                            />
-                        </div>
+                <div className={classes.buttons_container}>
+                    <div className={classes.buttons}>
+                        <Button
+                            type="submit"
+                            text="Go To Payment"
+                            width="100%"
+                            height="3rem"
+                        />
                     </div>
-                </form>
-            </>
-        )
-    }
+                </div>
+            </form>
+        </>
+    )
+}

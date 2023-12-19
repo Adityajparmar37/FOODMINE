@@ -6,7 +6,10 @@ export const createOrder = async (order) => {
     try {
         // console.log(order);
         const { data } = axios.post('/api/orders/create', order);
-        return data;
+        const res = {
+            ...data, flag: true
+        }
+        return res;
     } catch (error) { }
 };
 
@@ -28,6 +31,7 @@ export const pay = async paymentId => {
 
 
 export const trackOrderById = async (orderId) => {
+    console.log("data -> ", orderId)
     const { data } = await axios.get('/api/orders/track/' + orderId);
     return data;
 }

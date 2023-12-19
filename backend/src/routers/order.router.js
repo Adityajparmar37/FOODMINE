@@ -4,6 +4,8 @@ import { OrderModel } from '../model/order.model.js';
 import { OrderStatus } from '../constants/orderStatus.js';
 import authMid from '../middleware/authMid.js'
 import { UserModel } from '../model/user.model.js';
+import Mailgen from 'mailgen';
+import nodemailer from 'nodemailer';
 
 const router = Router();
 router.use(authMid);
@@ -27,30 +29,92 @@ router.post('/create', handler(async (req, res) => {
 }))
 
 
-//payment , put method is whe we want to update or have changes in Database
+//payment , put method is when we want to update or have changes in Database
 
 router.put('/pay', handler(async (req, res) => {
     const { paymentId } = req.body;
     const order = await getNewOrderForCurrentUser(req);
-    if (!order) {
-        res.status(BAD_REQUEST).send('Order Not Found!');
-        return;
-    }
 
+    if (!order) {
+        return res.status(BAD_REQUEST).send('Order Not Found!');
+    }
+    // const orderId = mongoose.Types.ObjectId(order.id);
     order.paymentId = paymentId;
     order.status = OrderStatus.PAYED;
-    await order.save();
 
-    res.send(order._id);
-})
-);
+    // console.log("User order ==>" + order);
+
+    const user = await UserModel.findOne({ _id: order.user });
+    // console.log("user details fetch ==> " + user);
+
+    console.log("ENV==> " + process.env.EMAIL + " PASS==> " + process.env.MAILPASS);
+
+
+    try {
+        await order.save();
+        // Email setup
+        let config = {
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.MAILPASS
+            }
+        }
+
+        let transporter = nodemailer.createTransport(config);
+
+        let MailGenerator = new Mailgen({
+            theme: "default",
+            product: {
+                name: "Mailgen",
+                link: 'https://mailgen.js/'
+            }
+        })
+
+        let response = {
+            body: {
+                name: order.name,
+                intro: "Your order Details",
+                table: {
+                    data: [
+                        {
+                            OderId: order.id,
+                            PaymentId: paymentId,
+                            address: order.address,
+                            Price: order.cartItems[0].price
+                        }
+                    ]
+                },
+                outro: "Enjoy your Meal, Thank you "
+            }
+        }
+
+        let mail = MailGenerator.generate(response)
+
+        let message = {
+            from: process.env.EMAIL,
+            to: user.email,
+            subject: "Place Order",
+            html: mail
+        }
+
+        await transporter.sendMail(message);
+        res.status(201).json({
+            orderId: order._id.toString(),
+            msg: "You should receive an email"
+        });
+    } catch (error) {
+        console.error('Error processing payment and sending email:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+}));
 
 
 router.get('/track/:orderId', handler(async (req, res) => {
     const { orderId } = req.params;
     const user = await UserModel.findById(req.user.id);
 
-
+    console.log("order :" + orderId)
     //find the order //agar admin hase to je pn orderId admin bole ae badhe api do
     const filter = {
         _id: orderId,
@@ -61,6 +125,9 @@ router.get('/track/:orderId', handler(async (req, res) => {
         //jo agar ae user db ma che toh j ena orderId match kari order batavo        
         filter.user = user._id;
     }
+
+    console.log(filter._id)
+    console.log("orderId -> " + orderId)
 
     const order = await OrderModel.findOne(filter);
 

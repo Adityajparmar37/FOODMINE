@@ -12,6 +12,7 @@ export default function OrderTrack() {
     const [order, setOrder] = useState();
 
     useEffect(() => {
+        console.log('order id -> ::: ', orderId)
         orderId && trackOrderById(orderId).then(order => {
             setOrder(order);
         })
