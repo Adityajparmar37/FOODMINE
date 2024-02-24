@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import CheckoutPage from "./components/Checkout/CheckoutPage";
 import CartPage from "./Pages/Cart/CartPage";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 import FoodPage from "./Pages/Food/FoodPage";
 import HomePage from "./Pages/Home/HomePage";
 import LoginPage from "./Pages/Login/LoginPage";
@@ -81,6 +82,15 @@ function AppRoutes() {
           element={
             <AuthRoute>
               <OrderPage />
+            </AuthRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <AuthRoute>
+              <Dashboard />
             </AuthRoute>
           }
         />
