@@ -73,10 +73,8 @@ router.get('/tags', handler(async (req, res) => {
     };
 
     tags.unshift(all)  //adding all in begining of the list
-
     res.send(tags);
 }))
-
 
 router.get('/search/:searchTerm', handler(async (req, res) => {
 
