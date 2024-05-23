@@ -1,10 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import AdminRoute from "./components/AdminRoute/AdminRoute";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import CheckoutPage from "./components/Checkout/CheckoutPage";
 import CartPage from "./Pages/Cart/CartPage";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import FoodPage from "./Pages/Food/FoodPage";
+import FoodsAdminPage from "./Pages/FoodsAdmin/FoodsAdminPage";
 import HomePage from "./Pages/Home/HomePage";
 import LoginPage from "./Pages/Login/LoginPage";
 import OrderPage from "./Pages/Order/OrderPage";
@@ -92,6 +94,15 @@ function AppRoutes() {
             <AuthRoute>
               <Dashboard />
             </AuthRoute>
+          }
+        />
+
+        <Route
+          path="/admin/foods/:searchTerm?"
+          element={
+            <AdminRoute>
+              <FoodsAdminPage />
+            </AdminRoute>
           }
         />
       </Routes>
