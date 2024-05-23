@@ -46,6 +46,22 @@ export default function FoodsAdminPage() {
     );
   };
 
+  const deleteFood = async (food) => {
+    const confirmed = window.confirm(
+      `Delete Food ${food.name} ?`
+    );
+
+    if (!confirmed) return;
+
+    await deleteById(food.id);
+    toast.success(
+      ` "${food.name}" Has been Removed !`
+    );
+    setFoods(
+      foods.filter((f) => f.id != food.id)
+    );
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.list}>
@@ -84,7 +100,9 @@ export default function FoodsAdminPage() {
                   }>
                   Edit
                 </Link>
-                <Link>Delete</Link>
+                <Link onClick={()=>deleteFood(food)}>
+                  Delete
+                </Link>
               </div>
             </div>
           ))}
