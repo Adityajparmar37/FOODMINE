@@ -7,6 +7,7 @@ import Input from "../../components/Input/Input";
 import InputContainer from "../../components/InputContainer/InputContainer";
 import Title from "../../components/Title/Title";
 import { getById } from "../../services/foodService";
+import { uploadImage } from "../../services/uploadServices";
 import classes from "./FoodEdit.module.css";
 
 export default function FoodEditPage() {
@@ -36,7 +37,11 @@ export default function FoodEditPage() {
 
   const submit = () => {};
 
-  const upload = () => {};
+  const upload = async (event) => {
+    setImageUrl(null);
+    const imageUrl = await uploadImage(event);
+    setImageUrl(imageUrl);
+  };
 
   return (
     <div className={classes.container}>
@@ -120,7 +125,6 @@ export default function FoodEditPage() {
               isEditMode ? "Update" : "Create"
             }
           />
-          
         </form>
       </div>
     </div>
