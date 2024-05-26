@@ -5,6 +5,7 @@ import handler from "express-async-handler";
 import { UserModel } from "../model/user.model.js";
 import bcrypt from "bcryptjs";
 import authMid from "../middleware/authMid.js";
+import adminMid from "../middleware/adminMid.js";
 
 const router = Router();
 
@@ -158,5 +159,54 @@ const generateTokenResponese = (user) => {
     token,
   };
 };
+
+router.get(
+  "/getall/:searchTerm?",
+  adminMid,
+  handler(async (req, res) => {
+    const { searchTerm } = req.params;
+
+    const filter = searchTerm
+      ? {
+          name: {
+            $regex: new RegExp(searchTerm, "i"),
+          },
+        }
+      : {};
+
+    const users = await UserModel.find(filter, {
+      password: 0,
+    });
+    res.send(users);
+  })
+);
+
+router.put(
+  "/status/:userId",
+  adminMid,
+  handler(async (req, res) => {
+    try {
+      const { userId } = req.params;
+      console.log(userId);
+
+      if (userId === req.user.id) {
+        res
+          .status(400)
+          .send("Cannot Block Yourself !");
+        return;
+      } else {
+        const user = await UserModel.findById(
+          userId
+        );
+        user.isBlocked = !user.isBlocked;
+
+        user.save();
+        res.send(user.isBlocked);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  })
+);
 
 export default router;

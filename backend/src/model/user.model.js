@@ -14,7 +14,10 @@ export const UserSchema = new Schema(
     address: { type: String, required: true },
     isAdmin: {
       type: Boolean,
-      required: false,
+      default: false,
+    },
+    isBlocked: {
+      type: Boolean,
       default: false,
     },
   },

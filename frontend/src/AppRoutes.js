@@ -15,6 +15,7 @@ import OrderTrack from "./Pages/OrderTrack/OrderTrack";
 import Payment from "./Pages/Payment/Payment";
 import ProfilePages from "./Pages/Profile/ProfilePages";
 import Register from "./Pages/Register/Register";
+import UsersPage from "./Pages/UsersPage/UsersPage";
 
 function AppRoutes() {
   return (
@@ -121,6 +122,15 @@ function AppRoutes() {
           element={
             <AdminRoute>
               <FoodEditPage />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users/:searchTerm?"
+          element={
+            <AdminRoute>
+              <UsersPage />
             </AdminRoute>
           }
         />

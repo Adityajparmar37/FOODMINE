@@ -56,3 +56,18 @@ export const changePassword = async (
     password
   );
 };
+
+export const getAll = async (searchTerm) => {
+  const { data } = await axios.get(
+    "api/users/getAll/" + (searchTerm ?? " ")
+  );
+
+  return data;
+};
+
+export const UserStatus = async (userId) => {
+  console.log(userId);
+  const { data } = await axios.put("api/users/status/" + userId);
+  console.log(data);
+  return data;
+};
