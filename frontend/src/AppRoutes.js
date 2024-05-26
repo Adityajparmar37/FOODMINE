@@ -15,6 +15,7 @@ import OrderTrack from "./Pages/OrderTrack/OrderTrack";
 import Payment from "./Pages/Payment/Payment";
 import ProfilePages from "./Pages/Profile/ProfilePages";
 import Register from "./Pages/Register/Register";
+import UserEditPage from "./Pages/UserEdit/UserEditPage";
 import UsersPage from "./Pages/UsersPage/UsersPage";
 
 function AppRoutes() {
@@ -131,6 +132,15 @@ function AppRoutes() {
           element={
             <AdminRoute>
               <UsersPage />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/editUser/:userId"
+          element={
+            <AdminRoute>
+              <UserEditPage />
             </AdminRoute>
           }
         />

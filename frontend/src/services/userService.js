@@ -67,7 +67,26 @@ export const getAll = async (searchTerm) => {
 
 export const UserStatus = async (userId) => {
   console.log(userId);
-  const { data } = await axios.put("api/users/status/" + userId);
+  const { data } = await axios.put(
+    "api/users/status/" + userId
+  );
   console.log(data);
+  return data;
+};
+
+export const getById = async (userId) => {
+  console.log(userId);
+  const { data } = await axios.get(
+    "api/users/getById/" + userId
+  );
+
+  return data;
+};
+
+export const updateUser = async (userData) => {
+  const { data } = await axios.put(
+    "api/users/update",
+    userData
+  );
   return data;
 };
