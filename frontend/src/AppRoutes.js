@@ -6,6 +6,7 @@ import CheckoutPage from "./components/Checkout/CheckoutPage";
 import CartPage from "./Pages/Cart/CartPage";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import FoodPage from "./Pages/Food/FoodPage";
+import FoodEditPage from "./Pages/FoodEdit/FoodEditPage";
 import FoodsAdminPage from "./Pages/FoodsAdmin/FoodsAdminPage";
 import HomePage from "./Pages/Home/HomePage";
 import LoginPage from "./Pages/Login/LoginPage";
@@ -102,6 +103,24 @@ function AppRoutes() {
           element={
             <AdminRoute>
               <FoodsAdminPage />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/addFood"
+          element={
+            <AdminRoute>
+              <FoodEditPage />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/editFood/:foodId"
+          element={
+            <AdminRoute>
+              <FoodEditPage />
             </AdminRoute>
           }
         />
