@@ -14,6 +14,38 @@ router.get(
   })
 );
 
+router.post(
+  "/addFood",
+  adminMid,
+  handler(async (req, res) => {
+    const {
+      name,
+      price,
+      tags,
+      favorite,
+      origins,
+      cookTime,
+      imageUrl,
+    } = req.body;
+
+    const food = new FoodModel({
+      name,
+      price,
+      tags: tags.split ? tags.split(",") : tags,
+      favorite,
+      imageUrl,
+      origins: origins.split
+        ? origins.split(",")
+        : origins,
+      cookTime,
+    });
+
+    await food.save();
+
+    res.send(food);
+  })
+);
+
 router.get(
   "/tags",
   handler(async (req, res) => {
@@ -133,7 +165,7 @@ router.get(
 );
 
 router.put(
-  "/",
+  "/updateFood",
   adminMid,
   handler(async (req, res) => {
     const {
@@ -142,9 +174,9 @@ router.put(
       price,
       tags,
       favorite,
+      imageUrl,
       origins,
       cookTime,
-      imageUrl,
     } = req.body;
 
     await FoodModel.updateOne(
@@ -157,7 +189,7 @@ router.put(
         imageUrl,
         origins: origins.split
           ? origins.split(",")
-          : origins ,
+          : origins,
         cookTime,
       }
     );

@@ -40,5 +40,13 @@ export async function deleteById(foodId) {
 }
 
 export async function update(food) {
-  await axios.put("/api/foods", food);
+  await axios.put("/api/foods/updateFood", food);
+}
+
+export async function add(food) {
+  const { data } = await axios.post(
+    "/api/foods/addFood",
+    food
+  );
+  return data;
 }

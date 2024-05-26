@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import {
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import InputContainer from "../../components/InputContainer/InputContainer";
 import Title from "../../components/Title/Title";
 import {
+  add,
   getById,
   update,
 } from "../../services/foodService";
@@ -17,6 +21,7 @@ import classes from "./FoodEdit.module.css";
 export default function FoodEditPage() {
   const { foodId } = useParams();
   const [imageUrl, setImageUrl] = useState();
+  const navigate = useNavigate();
 
   const isEditMode = !!foodId;
   // !! will convert anything into Boolean . If emty string or 0 then boolean value 0 false else 1 as true
@@ -47,6 +52,12 @@ export default function FoodEditPage() {
       toast.success(
         `Food "${food.name}" sucessfully updated !`
       );
+    } else {
+      const newFood = await add(food);
+      toast.success(
+        `Food "${food.name}" added successfully!`
+      );
+      navigate("/admin/foods");
     }
   };
 
