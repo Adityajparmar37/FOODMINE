@@ -132,4 +132,38 @@ router.get(
   })
 );
 
+router.put(
+  "/",
+  adminMid,
+  handler(async (req, res) => {
+    const {
+      id,
+      name,
+      price,
+      tags,
+      favorite,
+      origins,
+      cookTime,
+      imageUrl,
+    } = req.body;
+
+    await FoodModel.updateOne(
+      { _id: id },
+      {
+        name,
+        price,
+        tags: tags.split ? tags.split(",") : tags,
+        favorite,
+        imageUrl,
+        origins: origins.split
+          ? origins.split(",")
+          : origins ,
+        cookTime,
+      }
+    );
+
+    res.send();
+  })
+);
+
 export default router;

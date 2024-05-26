@@ -18,7 +18,7 @@ export const uploadImage = async (event) => {
           toast.update(toastId, { progress });
         else
           toastId = toast.success(
-            "Uploading please wait ...",
+            "Uploading...",
             { progress }
           );
       },
@@ -33,7 +33,7 @@ const getImage = async (event) => {
 
   if (!files || files.length <= 0) {
     toast.warning(
-      "Upload file is not selected!",
+      "Upload file is nott selected!",
       "File Upload"
     );
     return null;
@@ -41,12 +41,9 @@ const getImage = async (event) => {
 
   const file = files[0];
 
-  if (
-    file.type !== "image/jpeg" ||
-    file.type !== "image/png"
-  ) {
+  if (file.type !== "image/jpeg") {
     toast.error(
-      "Only JPEG or PNG type is allowed",
+      "Only JPG type is allowed",
       "File Type Error"
     );
     return null;
