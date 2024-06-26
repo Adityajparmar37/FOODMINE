@@ -2,6 +2,7 @@ import { Router } from "express";
 import { FoodModel } from "../model/food.model.js";
 import handler from "express-async-handler";
 import adminMid from "../middleware/adminMid.js";
+import client from "../config/redis.config.js";
 
 const router = Router();
 
@@ -9,8 +10,25 @@ const router = Router();
 router.get(
   "/",
   handler(async (req, res) => {
-    const foods = await FoodModel.find({});
-    res.send(foods);
+    try {
+      const cacheFoods = await client.get(
+        "foods"
+      );
+
+      if (cacheFoods) {
+        return res.json(JSON.parse(cacheFoods));
+      }
+
+      const foods = await FoodModel.find({});
+      await client.setex(
+        "foods",
+        30,
+        JSON.stringify(foods)
+      );
+      res.send(foods);
+    } catch (error) {
+      console.log(error);
+    }
   })
 );
 
@@ -41,6 +59,7 @@ router.post(
     });
 
     await food.save();
+    await client.del("foods");
 
     res.send(food);
   })
@@ -135,6 +154,7 @@ router.delete(
   handler(async (req, res) => {
     const { foodId } = req.params;
     await FoodModel.deleteOne({ _id: foodId });
+    await client.del("foods");
     res.send();
   })
 );
@@ -154,15 +174,44 @@ router.get(
 router.get(
   "/:foodId",
   handler(async (req, res) => {
-    const { foodId } = req.params;
+    try {
+      const { foodId } = req.params;
 
-    const foods = await FoodModel.findById(
-      foodId
-    );
+      const cacheFoods = await client.get(
+        "foods"
+      );
 
-    res.send(foods);
+      if (cacheFoods) {
+        const food = JSON.parse(cacheFoods).find(
+          (food) => food._id === foodId
+        );
+        if (food) {
+          return res.send(food);
+        }
+      }
+
+      const food = await FoodModel.findById(
+        foodId
+      );
+      if (!food) {
+        return res
+          .status(404)
+          .send({ error: "Food not found" });
+      }
+
+      res.send(food);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .send({
+          error:
+            "An error occurred while fetching the food item.",
+        });
+    }
   })
 );
+
 
 router.put(
   "/updateFood",
@@ -193,6 +242,8 @@ router.put(
         cookTime,
       }
     );
+
+    await client.del("foods");
 
     res.send();
   })

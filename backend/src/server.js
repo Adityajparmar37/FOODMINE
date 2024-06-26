@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
+import morgan from "morgan";
 import cors from "cors";
 import foodRouter from "./routers/food.router.js";
 import userRouter from "./routers/user.router.js";
@@ -14,6 +15,7 @@ dbconnect();
 
 const app = express();
 app.use(express.json());
+app.use(morgan("dev"));
 
 app.use(
   cors({
