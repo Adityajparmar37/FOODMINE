@@ -8,7 +8,7 @@ A food ordering system with an easy UI for a seamless experience from selection 
 ## 📜 Features
 
 1. **Authentication and Authorization:**
-   - Secure user authentication with JWT tokens and Bcrypt.js for robust data protection.
+   - Secure user authentication with JWT tokens and Bcrypt.js for Password hasing.
 
 2. **User Functionality:**
    - Browse food items and manage cart.
