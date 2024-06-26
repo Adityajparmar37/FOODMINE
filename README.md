@@ -1,7 +1,7 @@
 
 # Project Title
 
-**FoodMine** : Quicker Search, Faster Delivery
+**FoodMine** : Quick Food  Faster Delivery - End your craving !
 
 
 ## 📑 Synopsis 
