@@ -6,7 +6,7 @@
 
 ## 📑 Synopsis 
 
-A food ordering system with an easy UI for a seamless experience from selection to payment. Along side with an admin panel to manage food and user levels. Fast service with quick data retrieval to end your cravings!
+A food ordering system with an easy UI for a seamless experience from selection to payment. Along side with an admin panel to manage food and user levels. Fast service with quick data retrieval. 
 
 ## 📜 Features
 
