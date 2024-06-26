@@ -15,6 +15,7 @@ A food ordering system with an easy UI for a seamless experience from selection 
    - View live location and update address.
    - Make payments via PayPal and receive confirmation emails.
    - Access order history.
+   - Update Profile
 
 3. **Admin Functionality:**
    - Add, update, or delete food items.
@@ -46,7 +47,7 @@ A food ordering system with an easy UI for a seamless experience from selection 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/food-ordering-system.git
+   git clone https://github.com/Adityajparmar37/FOODMINE.git
    ```
 
 2. Go to backend and run 
