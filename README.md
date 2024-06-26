@@ -11,6 +11,7 @@
 
 1. **Authentication and Authorization:**
    - Secure user authentication with JWT tokens and Bcrypt.js for Password hasing.
+   - Two role base system : User and Admin
 
 2. **User Functionality:**
    - Browse food items and manage cart.
