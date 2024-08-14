@@ -4,7 +4,7 @@
 ## 📑 Synopsis 
 
 - A food ordering system with an easy UI for a seamless experience from selection to payment. Along side with an admin panel to manage food and user levels. Fast service with quick data retrieval. 
-- Optimize fast data retrieval for food item listings by using caching with the in-memory database `Redis` instead of querying the main database.
+- Optimize fast data retrieval for food item listings.
 
 
 ## 📜 Features
@@ -42,7 +42,6 @@
 
 **Database:**
 * MongoDB 
-* Redis ( for In-memory database )
 
 
 ## ⚙️ Installation
