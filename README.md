@@ -4,7 +4,8 @@
 ## 📑 Synopsis 
 
 - A food ordering system with an easy UI for a seamless experience from selection to payment. Along side with an admin panel to manage food and user levels. Fast service with quick data retrieval. 
-- Optimize fast data retrieval for food item listings using `Redis caching` in memory database. 
+- Optimize fast data retrieval for food item listings using `Redis caching` in memory database.
+- Limit API request using `custom Rate Limiter` based on `Token Bucket Rate Limiting Algorithm`. 
 
 
 ## 📜 Features
