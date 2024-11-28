@@ -3,28 +3,24 @@ import { FoodModel } from "../model/food.model.js";
 import handler from "express-async-handler";
 import adminMid from "../middleware/adminMid.js";
 import client from "../config/redis.config.js";
+import createRateLimiter from "../middleware/ratelimit.js";
 
 const router = Router();
+const searchFoodLimiter = createRateLimiter(2, 10000);
 
 //handler is use for 2 reasons one to make my api async and second to handle express error
 router.get(
   "/",
   handler(async (req, res) => {
     try {
-      const cacheFoods = await client.get(
-        "foods"
-      );
+      const cacheFoods = await client.get("foods");
 
       if (cacheFoods) {
         return res.json(JSON.parse(cacheFoods));
       }
 
       const foods = await FoodModel.find({});
-      await client.setex(
-        "foods",
-        30,
-        JSON.stringify(foods)
-      );
+      await client.setex("foods", 30, JSON.stringify(foods));
       res.send(foods);
     } catch (error) {
       console.log(error);
@@ -36,15 +32,8 @@ router.post(
   "/addFood",
   adminMid,
   handler(async (req, res) => {
-    const {
-      name,
-      price,
-      tags,
-      favorite,
-      origins,
-      cookTime,
-      imageUrl,
-    } = req.body;
+    const { name, price, tags, favorite, origins, cookTime, imageUrl } =
+      req.body;
 
     const food = new FoodModel({
       name,
@@ -52,9 +41,7 @@ router.post(
       tags: tags.split ? tags.split(",") : tags,
       favorite,
       imageUrl,
-      origins: origins.split
-        ? origins.split(",")
-        : origins,
+      origins: origins.split ? origins.split(",") : origins,
       cookTime,
     });
 
@@ -131,14 +118,12 @@ router.get(
 
 router.get(
   "/search/:searchTerm",
+  searchFoodLimiter,
   handler(async (req, res) => {
     const { searchTerm } = req.params;
 
     ///toLower() cannot use in MongoDB hence we have to create a regualer Expresion
-    const searchRegex = new RegExp(
-      searchTerm,
-      "i"
-    );
+    const searchRegex = new RegExp(searchTerm, "i");
 
     const foods = await FoodModel.find({
       name: { $regex: searchRegex },
@@ -177,56 +162,36 @@ router.get(
     try {
       const { foodId } = req.params;
 
-      const cacheFoods = await client.get(
-        "foods"
-      );
+      const cacheFoods = await client.get("foods");
 
       if (cacheFoods) {
-        const food = JSON.parse(cacheFoods).find(
-          (food) => food._id === foodId
-        );
+        const food = JSON.parse(cacheFoods).find((food) => food._id === foodId);
         if (food) {
           return res.send(food);
         }
       }
 
-      const food = await FoodModel.findById(
-        foodId
-      );
+      const food = await FoodModel.findById(foodId);
       if (!food) {
-        return res
-          .status(404)
-          .send({ error: "Food not found" });
+        return res.status(404).send({ error: "Food not found" });
       }
 
       res.send(food);
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .send({
-          error:
-            "An error occurred while fetching the food item.",
-        });
+      res.status(500).send({
+        error: "An error occurred while fetching the food item.",
+      });
     }
   })
 );
-
 
 router.put(
   "/updateFood",
   adminMid,
   handler(async (req, res) => {
-    const {
-      id,
-      name,
-      price,
-      tags,
-      favorite,
-      imageUrl,
-      origins,
-      cookTime,
-    } = req.body;
+    const { id, name, price, tags, favorite, imageUrl, origins, cookTime } =
+      req.body;
 
     await FoodModel.updateOne(
       { _id: id },
@@ -236,9 +201,7 @@ router.put(
         tags: tags.split ? tags.split(",") : tags,
         favorite,
         imageUrl,
-        origins: origins.split
-          ? origins.split(",")
-          : origins,
+        origins: origins.split ? origins.split(",") : origins,
         cookTime,
       }
     );
