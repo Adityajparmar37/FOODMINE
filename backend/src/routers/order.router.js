@@ -6,9 +6,12 @@ import authMid from "../middleware/authMid.js";
 import { UserModel } from "../model/user.model.js";
 import Mailgen from "mailgen";
 import nodemailer from "nodemailer";
+import createRateLimiter from "../middleware/ratelimit.js";
 
 const router = Router();
 router.use(authMid);
+
+const PayRateLimiter = createRateLimiter(1, 1000);
 
 router.post(
   "/create",
@@ -16,8 +19,7 @@ router.post(
     const order = req.body;
     // console.log("ORDER==>", order.cartItems);
 
-    if (order.cartItems.length <= 0)
-      res.status(401).send("Cart Is Empty !");
+    if (order.cartItems.length <= 0) res.status(401).send("Cart Is Empty !");
 
     await OrderModel.deleteOne({
       user: req.user.id,
@@ -38,16 +40,13 @@ router.post(
 
 router.put(
   "/pay",
+  PayRateLimiter,
   handler(async (req, res) => {
     const { paymentId } = req.body;
-    const order = await getNewOrderForCurrentUser(
-      req
-    );
+    const order = await getNewOrderForCurrentUser(req);
 
     if (!order) {
-      return res
-        .status(BAD_REQUEST)
-        .send("Order Not Found!");
+      return res.status(BAD_REQUEST).send("Order Not Found!");
     }
     // const orderId = mongoose.Types.ObjectId(order.id);
     order.paymentId = paymentId;
@@ -61,10 +60,7 @@ router.put(
     // console.log("user details fetch ==> " + user);
 
     console.log(
-      "ENV==> " +
-        process.env.EMAIL +
-        " PASS==> " +
-        process.env.MAILPASS
+      "ENV==> " + process.env.EMAIL + " PASS==> " + process.env.MAILPASS
     );
 
     try {
@@ -78,8 +74,7 @@ router.put(
         },
       };
 
-      let transporter =
-        nodemailer.createTransport(config);
+      let transporter = nodemailer.createTransport(config);
 
       let MailGenerator = new Mailgen({
         theme: "default",
@@ -122,13 +117,8 @@ router.put(
         msg: "You should receive an email",
       });
     } catch (error) {
-      console.error(
-        "Error processing payment and sending email:",
-        error
-      );
-      return res
-        .status(500)
-        .json({ error: "Internal Server Error" });
+      console.error("Error processing payment and sending email:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
     }
   })
 );
@@ -137,9 +127,7 @@ router.get(
   "/track/:orderId",
   handler(async (req, res) => {
     const { orderId } = req.params;
-    const user = await UserModel.findById(
-      req.user.id
-    );
+    const user = await UserModel.findById(req.user.id);
 
     console.log("order :" + orderId);
     //find the order //agar admin hase to je pn orderId admin bole ae badhe api do
@@ -155,9 +143,7 @@ router.get(
     console.log(filter._id);
     console.log("orderId -> " + orderId);
 
-    const order = await OrderModel.findOne(
-      filter
-    );
+    const order = await OrderModel.findOne(filter);
 
     if (!order) return res.send(401);
     else return res.send(order);
@@ -167,9 +153,7 @@ router.get(
 router.get(
   "/newOrderForCurrentUser",
   handler(async (req, res) => {
-    const order = await getNewOrderForCurrentUser(
-      req
-    );
+    const order = await getNewOrderForCurrentUser(req);
     if (order) res.send(order);
     else res.status(400).send();
   })
@@ -185,18 +169,14 @@ router.get(
   handler(async (req, res) => {
     const status = req.params.status;
 
-    const user = await UserModel.findById(
-      req.user.id
-    );
+    const user = await UserModel.findById(req.user.id);
     const filter = {};
 
     //if it is not admin then show only that user order , if admin then show all the orders
     if (!user.isAdmin) filter.user = user._id;
     if (status) filter.status = status;
 
-    const orders = await OrderModel.find(
-      filter
-    ).sort("-createdAt");
+    const orders = await OrderModel.find(filter).sort("-createdAt");
     res.send(orders);
   })
 );
