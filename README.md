@@ -5,7 +5,7 @@
 
 - A food ordering system with an easy UI for a seamless experience from selection to payment. Along side with an admin panel to manage food and user levels. Fast service with quick data retrieval. 
 - Optimize fast data retrieval for food item listings using `Redis caching` in memory database.
-- Limit API request using `custom Rate Limiter` based on `Token Bucket Rate Limiting Algorithm`. 
+- Limit API request using `custom Rate Limiter` based on `Token Bucket Rate Limiting Algorithm` , reducing server load by `70%` 
 
 
 ## 📜 Features
@@ -66,7 +66,62 @@
     npm install
     ```
 
-4. Setup .env file 
+4. Install Redis
+   - Install Docker Desktop/Docker daemon from:
+     ```bash
+     https://www.docker.com/products/docker-desktop/
+     ```
+
+    Run all following commands in terminal
+     
+   - Pull Redis Image
+     ```bash
+     docker pull redis
+     ```
+   - Expose Redis on a Port
+     ```bash
+     docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+     ```
+   - Start Docker
+     ```bash
+     docker ps
+     ```
+     Note: After this you will get a ID copy that
+
+     
+   - Start Redis
+     ```bash
+     docker exec it <id> bash
+
+     redis-cli
+     ```
+     
+
+* **4.1)** *OR Install it without docker through following steps*:
+        
+   **For Linux Users**:
+    
+    1. Install Redis:
+       ```bash
+       sudo apt-get update
+       sudo apt-get install redis-server
+       ```
+    
+    2. Start the Redis server:
+       ```bash
+       redis-server
+       ```
+    
+    **For Windows Users:**
+    
+    Use Windows Subsystem for Linux (WSL) to install Redis:
+    
+    1. Install WSL and a Linux distribution (e.g., Ubuntu) from the Microsoft Store.
+    2. Open the WSL terminal and follow the Linux instructions to install Redis.
+
+   
+
+5. Setup .env file 
     ```bash
     MONGO_URI = "Your MongoDB Database URI"
 
@@ -83,7 +138,7 @@
     CLOUDINARY_API_SECRET = "Your cloudinary cloud api secret"
     ```
 
-5. To Run Project
+6. To Run Project
     ```bash
 
     cd frontend
